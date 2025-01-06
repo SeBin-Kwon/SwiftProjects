@@ -9,7 +9,7 @@ import UIKit
 
 class BasicTableViewController: UITableViewController {
 
-    var list = ["프로젝트", "쇼핑", "메인 업무"] {
+    var list = ["프로젝트sdfsdfsdfsdfeㄴㄷㄹㄴㄹㄴㅇㄹㄴㄷㄹㄴㄹㅇㄴㄹㄷㄴㄹㄴㅇㄹㄴㄹㄴㄹㄴㄹㅇㄴㅇㄹㄴㄷㄴㄹㅇㄴㄹㄴㅇㄹㄴㄷㄹㄴㅇㄹㄴㅇㄹㄴㄷㄹㄴㅇㄹ", "쇼핑", "메인 업무"] {
         didSet {
             tableView.reloadData()
         }
@@ -21,7 +21,7 @@ class BasicTableViewController: UITableViewController {
 //        var monster = Monster()
         
         
-        tableView.rowHeight = 80
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     @IBAction func randomTextTapped(_ sender: UIBarButtonItem) {
@@ -47,7 +47,7 @@ class BasicTableViewController: UITableViewController {
     // 2. 셀 디자인 및 데이터 처리
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sebinCell")!
-        
+        cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = list[indexPath.row]
 //        cell.detailTextLabel?.text = "디테일 텍스트 레이블"
         

@@ -46,10 +46,18 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="F5X-5s-cuD" secondAttribute="trailing" id="k7p-aA-uWd"/>
+                                                <constraint firstItem="F5X-5s-cuD" firstAttribute="leading" secondItem="SYG-5p-qV8" secondAttribute="leading" id="tnI-36-IYh"/>
+                                            </constraints>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFh-ou-x3s">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFh-ou-x3s">
                                             <rect key="frame" x="16" y="8" width="40" height="40"/>
                                             <color key="backgroundColor" name="E80B26"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="MDI-HG-zsC"/>
+                                                <constraint firstAttribute="height" constant="40" id="u92-vZ-o6p"/>
+                                            </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="folder.fill" catalog="system"/>
                                         </button>

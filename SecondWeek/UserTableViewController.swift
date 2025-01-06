@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 struct Friend {
     let name: String
@@ -16,7 +15,7 @@ struct Friend {
 
 class UserTableViewController: UITableViewController {
     
-    let friends = FriendsInfo().list
+    var friends = FriendsInfo().list
 //    let friends = [
 //        Friend(name: "칙촉", message: "행복한 하루", profile_image: "pencil"),
 //        Friend(name: "고래밥", message: "고래밥 냠냠", profile_image: "star"),
@@ -29,6 +28,19 @@ class UserTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let nib = UINib(nibName: "NoProfileTableViewCell", bundle: nil)
+//        tableView.register(nib, forCellReuseIdentifier: "NoProfileTableViewCell")
+        
+    }
+    
+    @objc
+    func likeButtonTapped(_ sender: UIButton) {
+        print(#function, sender.tag)
+        friends[sender.tag].like.toggle()
+//        tableView.reloadData()
+        tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .fade)
+        
+        print(friends[sender.tag].like)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,33 +51,14 @@ class UserTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCell", for: indexPath) as! UserTableViewCell
         let row = friends[indexPath.row]
         
-        
-        let name = row.like ? "heart.fill" : "heart"
-        let btn = UIImage(systemName: name)
-        cell.likeButton.setImage(btn, for: .normal)
+        cell.configureData(row: row)
         cell.likeButton.tag = indexPath.row
-        cell.likeButton.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
-        
-        cell.profileImageView.backgroundColor = .brown
-        
-        cell.nameLabel.text = row.name
-        cell.messageLabel.text = row.message
-        let image = row.profile_image
-        if let image {
-            let url = URL(string: image)
-            cell.profileImageView.kf.setImage(with: url)
-        } else {
-            cell.profileImageView.image = UIImage(systemName: "person")
-        }
-        cell.nameLabel.font = .boldSystemFont(ofSize: 30)
-        cell.messageLabel.font = .systemFont(ofSize: 20)
-        
-//        cell.likeButton.setImage(UIImage(systemName: name), for: .normal)
+        cell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return UITableView.automaticDimension
     }
 }
