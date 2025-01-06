@@ -9,6 +9,9 @@ import UIKit
 import Kingfisher
 
 class UserTableViewCell: UITableViewCell {
+    
+    static let identifier = "UserTableViewCell"
+    
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
@@ -34,7 +37,7 @@ class UserTableViewCell: UITableViewCell {
     
     func configureData(row: Friends) {
         print(#function)
-        nameLabel.text = row.name
+        nameLabel.text = row.nameDescription
         messageLabel.text = row.message
         
         let image = row.profile_image
