@@ -13,6 +13,7 @@ class TenViewController: UIViewController, UITableViewDelegate, UITableViewDataS
 
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
+    static let format = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
