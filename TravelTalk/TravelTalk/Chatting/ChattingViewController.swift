@@ -8,7 +8,7 @@
 import UIKit
 
 class ChattingViewController: UIViewController {
-    let id = "ChattingTableViewCell"
+    private let id = ChattingTableViewCell.identifier
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()

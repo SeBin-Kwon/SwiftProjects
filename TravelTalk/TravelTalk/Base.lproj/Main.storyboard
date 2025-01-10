@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="agC-Ey-dzW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9z5-Od-Fla">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-Iq-3f5">
-                                <rect key="frame" x="28" y="203" width="336" height="481"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-Iq-3f5">
+                                <rect key="frame" x="16" y="175" width="361" height="627"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wn8-yp-Ab4">
                                     <size key="itemSize" width="128" height="128"/>
@@ -38,13 +37,30 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Guo-Ra-vwt">
+                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="90c-HL-cOZ"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eFB-Iq-3f5" secondAttribute="trailing" constant="16" id="0aP-6C-ZoK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eFB-Iq-3f5" secondAttribute="bottom" constant="16" id="553-Dz-Lp0"/>
+                            <constraint firstItem="eFB-Iq-3f5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Exo-JC-yBo"/>
+                            <constraint firstItem="eFB-Iq-3f5" firstAttribute="top" secondItem="Guo-Ra-vwt" secondAttribute="bottom" constant="16" id="X7I-Dl-Hnf"/>
+                            <constraint firstItem="Guo-Ra-vwt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="h8L-zb-9Ag"/>
+                            <constraint firstItem="Guo-Ra-vwt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jKQ-uk-Vmu"/>
+                            <constraint firstItem="Guo-Ra-vwt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="m5X-cq-Xhn"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Travel Talk" id="v4s-Ba-cmX"/>
                     <connections>
                         <outlet property="collectionView" destination="eFB-Iq-3f5" id="Yd2-eW-NsB"/>
+                        <outlet property="searchBar" destination="Guo-Ra-vwt" id="3ZL-5w-EOD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
