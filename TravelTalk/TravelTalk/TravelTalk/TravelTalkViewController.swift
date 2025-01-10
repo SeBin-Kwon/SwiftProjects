@@ -13,7 +13,8 @@ class TravelTalkViewController: UIViewController {
     @IBOutlet var searchBar: UISearchBar!
     
     private let id = TravelTalkCollectionViewCell.identifier
-//    var nameList = [String]()
+    var isSearched = false
+    var filteredList = [ChatRoom]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +23,6 @@ class TravelTalkViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         configureCollectionViewLayout()
-//        mockChatList.forEach {
-//            nameList.append(<#T##newElement: String##String#>)
-//        }
     }
     
     private func configureCollectionViewLayout() {
@@ -44,18 +42,30 @@ class TravelTalkViewController: UIViewController {
     
 }
 
+// MARK: SearchBar
 extension TravelTalkViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        isSearched = false
         view.endEditing(true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty {
+            isSearched = false
+            collectionView.reloadData()
+            return
+        }
+        isSearched = true
+        filteredList = mockChatList.filter {
+            $0.chatroomName.localizedCaseInsensitiveContains(text)
+        }
+        collectionView.reloadData()
     }
 }
 
-
+// MARK: CollectionView
 extension TravelTalkViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -64,12 +74,13 @@ extension TravelTalkViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        mockChatList.count
+        isSearched ? filteredList.count : mockChatList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath) as! TravelTalkCollectionViewCell
-        cell.configureData(mockChatList[indexPath.item])
+        let list = isSearched ? filteredList : mockChatList
+        cell.configureData(list[indexPath.item])
         return cell
     }
     
