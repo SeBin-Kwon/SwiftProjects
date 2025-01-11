@@ -38,8 +38,6 @@ class TravelTalkViewController: UIViewController {
         collectionView.collectionViewLayout = layout
     }
     
-    
-    
 }
 
 // MARK: SearchBar
@@ -69,7 +67,10 @@ extension TravelTalkViewController: UISearchBarDelegate {
 extension TravelTalkViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        view.endEditing(true)
         guard let vc = storyboard?.instantiateViewController(withIdentifier: ChattingViewController.identifier) as? ChattingViewController else { return }
+        vc.chatList = mockChatList[indexPath.item].chatList
+
         navigationController?.pushViewController(vc, animated: true)
     }
     

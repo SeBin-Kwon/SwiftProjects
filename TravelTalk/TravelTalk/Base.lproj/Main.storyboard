@@ -47,6 +47,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eFB-Iq-3f5" secondAttribute="trailing" constant="16" id="0aP-6C-ZoK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eFB-Iq-3f5" secondAttribute="bottom" constant="16" id="553-Dz-Lp0"/>
@@ -75,14 +76,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="if9-bp-abt">
-                                <rect key="frame" x="52" y="249" width="274" height="309"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="if9-bp-abt">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QSC-oZ-0dG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QSC-oZ-0dG" firstAttribute="bottom" secondItem="if9-bp-abt" secondAttribute="bottom" id="2EO-Oy-glO"/>
+                            <constraint firstItem="if9-bp-abt" firstAttribute="top" secondItem="QSC-oZ-0dG" secondAttribute="top" id="HCC-LG-It3"/>
+                            <constraint firstItem="QSC-oZ-0dG" firstAttribute="trailing" secondItem="if9-bp-abt" secondAttribute="trailing" id="SR3-m4-swY"/>
+                            <constraint firstItem="if9-bp-abt" firstAttribute="leading" secondItem="QSC-oZ-0dG" secondAttribute="leading" id="yoG-Sr-Ctb"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="if9-bp-abt" id="8th-uB-YSP"/>
