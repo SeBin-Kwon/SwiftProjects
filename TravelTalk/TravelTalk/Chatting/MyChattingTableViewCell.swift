@@ -1,33 +1,30 @@
 //
-//  ChattingTableViewCell.swift
+//  MyChattingTableViewCell.swift
 //  TravelTalk
 //
-//  Created by Sebin Kwon on 1/10/25.
+//  Created by Sebin Kwon on 1/11/25.
 //
 
 import UIKit
 
-class ChattingTableViewCell: UITableViewCell {
-    
-    @IBOutlet var chatProfileImage: UIImageView!
-    @IBOutlet var nameLabel: UILabel!
+class MyChattingTableViewCell: UITableViewCell {
+
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureUI()
+        
     }
     
     private func configureUI() {
+        messageLabel.numberOfLines = 0
     }
     
     func configureData(_ item: Chat) {
-        nameLabel.text = item.user.rawValue
         messageLabel.text = item.message
         dateLabel.text = item.date
-        let image = UIImage(named: item.user.profileImage)
-        chatProfileImage.image = image
     }
-
+    
 }
