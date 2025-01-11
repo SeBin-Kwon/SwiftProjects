@@ -23,6 +23,12 @@ class TravelTalkViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         configureCollectionViewLayout()
+        configureSearchBarUI()
+    }
+    
+    private func configureSearchBarUI() {
+        searchBar.placeholder = "친구 이름을 검색해보세요"
+        searchBar.searchBarStyle = .minimal
     }
     
     private func configureCollectionViewLayout() {
@@ -32,10 +38,14 @@ class TravelTalkViewController: UIViewController {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = minimumLineSpacing
         layout.minimumInteritemSpacing = minimumInteritemSpacing
-        let width = UIScreen.main.bounds.width
+        let width = UIScreen.main.bounds.width - 32
         layout.itemSize = CGSize(width: width, height: 80)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.collectionViewLayout = layout
+    }
+    
+    private func configureNavigationBarUI(){
+        
     }
     
 }
@@ -79,7 +89,8 @@ extension TravelTalkViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath) as! TravelTalkCollectionViewCell
+        let tableCell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
+        guard let cell = tableCell as? TravelTalkCollectionViewCell else { return tableCell }
         let list = isSearched ? filteredList : mockChatList
         cell.configureData(list[indexPath.item])
         return cell

@@ -38,7 +38,7 @@
                                 </cells>
                             </collectionView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Guo-Ra-vwt">
-                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
+                                <rect key="frame" x="16" y="103" width="361" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="90c-HL-cOZ"/>
@@ -54,8 +54,8 @@
                             <constraint firstItem="eFB-Iq-3f5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Exo-JC-yBo"/>
                             <constraint firstItem="eFB-Iq-3f5" firstAttribute="top" secondItem="Guo-Ra-vwt" secondAttribute="bottom" constant="16" id="X7I-Dl-Hnf"/>
                             <constraint firstItem="Guo-Ra-vwt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="h8L-zb-9Ag"/>
-                            <constraint firstItem="Guo-Ra-vwt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jKQ-uk-Vmu"/>
-                            <constraint firstItem="Guo-Ra-vwt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="m5X-cq-Xhn"/>
+                            <constraint firstItem="Guo-Ra-vwt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-16" id="jKQ-uk-Vmu"/>
+                            <constraint firstItem="Guo-Ra-vwt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="m5X-cq-Xhn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Travel Talk" id="v4s-Ba-cmX"/>

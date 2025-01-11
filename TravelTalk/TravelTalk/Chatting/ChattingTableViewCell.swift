@@ -13,6 +13,7 @@ class ChattingTableViewCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
+    let format = DateFormatter()
     
     override func awakeFromNib() {
         super.awakeFromNib()
