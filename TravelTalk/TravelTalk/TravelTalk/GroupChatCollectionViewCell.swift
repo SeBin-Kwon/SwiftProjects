@@ -1,19 +1,20 @@
 //
-//  CollectionViewCell.swift
+//  GroupChatCollectionViewCell.swift
 //  TravelTalk
 //
-//  Created by Sebin Kwon on 1/10/25.
+//  Created by Sebin Kwon on 1/12/25.
 //
 
 import UIKit
 
-class TravelTalkCollectionViewCell: UICollectionViewCell {
-
-    @IBOutlet var profileImageView: UIImageView!
+class GroupChatCollectionViewCell: UICollectionViewCell {
+    
+    
+    @IBOutlet var groupImageList: [UIImageView]!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
-    static var format = DateFormatter()
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,10 +22,6 @@ class TravelTalkCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        profileImageView.layer.borderWidth = 0.5
-        profileImageView.layer.borderColor = UIColor.systemGray4.cgColor
         nameLabel.font = .systemFont(ofSize: 15, weight: .bold)
         messageLabel.font = .systemFont(ofSize: 13, weight: .medium)
         messageLabel.textColor = .gray
@@ -34,10 +31,14 @@ class TravelTalkCollectionViewCell: UICollectionViewCell {
     
     func configureData(_ item: ChatRoom) {
         nameLabel.text = item.chatroomName
-        guard let imageName = item.chatroomImage.first else { return }
-        let image = UIImage(named: imageName)
-        profileImageView.image = image
-        
+        for i in 0..<item.chatroomImage.count {
+            let image = UIImage(named: item.chatroomImage[i])
+            groupImageList[i].image = image
+            groupImageList[i].contentMode = .scaleAspectFill
+            groupImageList[i].layer.cornerRadius = groupImageList[i].frame.height / 2
+            groupImageList[i].layer.borderWidth = 0.5
+            groupImageList[i].layer.borderColor = UIColor.systemGray4.cgColor
+        }
         guard let lastChat = item.chatList.last else { return }
         messageLabel.text = lastChat.message
         dateLabel.text = dateFormetted(lastChat.date)

@@ -112,9 +112,11 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
         case .user:
             tableCell = tableView.dequeueReusableCell(withIdentifier: myChattingId, for: indexPath)
             guard let myCell = tableCell as? MyChattingTableViewCell else { return tableCell }
+            myCell.selectionStyle = .none
             myCell.configureData(chatList[indexPath.row])
         default:
             guard let cell = tableCell as? ChattingTableViewCell else { return tableCell }
+            cell.selectionStyle = .none
             cell.configureData(chatList[indexPath.row])
         }
          
