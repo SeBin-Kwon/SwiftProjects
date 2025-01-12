@@ -94,18 +94,17 @@ extension TravelTalkViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let imageCount = mockChatList[indexPath.item].chatroomImage.count
+        let list = isSearched ? filteredList : mockChatList
+        let imageCount = list[indexPath.item].chatroomImage.count
         switch imageCount {
         case 1:
             let tableCell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
             guard let cell = tableCell as? TravelTalkCollectionViewCell else { return tableCell }
-            let list = isSearched ? filteredList : mockChatList
             cell.configureData(list[indexPath.item])
             return cell
         default:
             let tableCell = collectionView.dequeueReusableCell(withReuseIdentifier: groupId, for: indexPath)
             guard let cell = tableCell as? GroupChatCollectionViewCell else { return tableCell }
-            let list = isSearched ? filteredList : mockChatList
             cell.configureData(list[indexPath.item])
             return cell
         }
