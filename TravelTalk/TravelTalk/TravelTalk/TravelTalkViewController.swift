@@ -82,8 +82,7 @@ extension TravelTalkViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         view.endEditing(true)
         guard let vc = storyboard?.instantiateViewController(withIdentifier: ChattingViewController.identifier) as? ChattingViewController else { return }
-        vc.chatList = mockChatList[indexPath.item].chatList
-        vc.chatroomName = mockChatList[indexPath.item].chatroomName
+        vc.chatRoom = mockChatList[indexPath.item]
         navigationController?.pushViewController(vc, animated: true)
     }
     
