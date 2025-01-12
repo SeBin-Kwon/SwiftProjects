@@ -33,6 +33,7 @@ class ChattingViewController: UIViewController {
         configureTableView()
         configureTextViewUI()
         configureChatButtonUI()
+        setupKeyboardEvent()
     }
     
     @IBAction func chatButtonTapped(_ sender: UIButton) {
@@ -42,7 +43,7 @@ class ChattingViewController: UIViewController {
         let message = Chat(user: .user, date: date, message: text)
         chatList.append(message)
         textView.text = ""
-        tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
+        scrollTableView(animated: true)
         view.endEditing(true)
     }
     
@@ -54,6 +55,20 @@ class ChattingViewController: UIViewController {
     
     private func configureChatButtonUI() {
         chatButton.tintColor = .gray
+    }
+    
+    private func setupKeyboardEvent() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ sender: Notification) {
+        scrollTableView(animated: true)
+    }
+    
+    private func scrollTableView(animated: Bool) {
+        if !chatList.isEmpty {
+            tableView.scrollToRow(at: endIndex, at: .bottom, animated: animated)
+        }
     }
 }
 
@@ -93,7 +108,7 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.register(myXib, forCellReuseIdentifier: myChattingId)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
-        tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
+        scrollTableView(animated: false)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -117,7 +132,7 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.configureData(chatList[indexPath.row])
         }
-         
+        
         return tableCell
     }
     
