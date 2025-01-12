@@ -14,7 +14,7 @@ class ChattingViewController: UIViewController {
     @IBOutlet var textView: UITextView!
     @IBOutlet var textViewBackground: UIView!
     @IBOutlet var chatButton: UIButton!
-    let textViewPlaceHolder = "메시지를 입력하세요"
+    private let textViewPlaceHolder = "메시지를 입력하세요"
     var chatRoom: ChatRoom?
     private var chatList = [Chat]() {
         didSet {
@@ -33,7 +33,6 @@ class ChattingViewController: UIViewController {
         configureTableView()
         configureTextViewUI()
         configureChatButtonUI()
-        setupKeyboardEvent()
     }
     
     @IBAction func chatButtonTapped(_ sender: UIButton) {
@@ -43,7 +42,6 @@ class ChattingViewController: UIViewController {
         let message = Chat(user: .user, date: date, message: text)
         chatList.append(message)
         textView.text = ""
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
         view.endEditing(true)
     }

@@ -113,12 +113,13 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QSC-oZ-0dG"/>
+                        <keyboardLayoutGuide key="keyboard" id="BBN-rf-OWV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="if9-bp-abt" firstAttribute="top" secondItem="QSC-oZ-0dG" secondAttribute="top" id="HCC-LG-It3"/>
+                            <constraint firstItem="QSC-oZ-0dG" firstAttribute="bottom" secondItem="if9-bp-abt" secondAttribute="bottom" constant="74" id="M5y-9v-lOX"/>
+                            <constraint firstItem="BBN-rf-OWV" firstAttribute="top" secondItem="iyT-Xl-oOc" secondAttribute="bottom" constant="8" symbolic="YES" id="Mm2-i1-6vu"/>
                             <constraint firstItem="QSC-oZ-0dG" firstAttribute="trailing" secondItem="if9-bp-abt" secondAttribute="trailing" id="SR3-m4-swY"/>
-                            <constraint firstItem="iyT-Xl-oOc" firstAttribute="top" secondItem="if9-bp-abt" secondAttribute="bottom" constant="16" id="Xpp-ns-MzB"/>
-                            <constraint firstItem="QSC-oZ-0dG" firstAttribute="bottom" secondItem="iyT-Xl-oOc" secondAttribute="bottom" constant="8" id="hz4-fK-Y1e"/>
                             <constraint firstItem="QSC-oZ-0dG" firstAttribute="trailing" secondItem="iyT-Xl-oOc" secondAttribute="trailing" constant="16" id="jmH-uf-dWJ"/>
                             <constraint firstItem="iyT-Xl-oOc" firstAttribute="leading" secondItem="QSC-oZ-0dG" secondAttribute="leading" constant="16" id="rts-4b-DrR"/>
                             <constraint firstItem="if9-bp-abt" firstAttribute="leading" secondItem="QSC-oZ-0dG" secondAttribute="leading" id="yoG-Sr-Ctb"/>
