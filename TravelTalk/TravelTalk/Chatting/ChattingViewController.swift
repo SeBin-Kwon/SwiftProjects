@@ -24,6 +24,11 @@ class ChattingViewController: UIViewController {
         tableView.register(myXib, forCellReuseIdentifier: myChattingId)
         tableView.rowHeight = UITableView.automaticDimension
         navigationItem.title = chatroomName
+        configureTableViewUI()
+    }
+    
+    func configureTableViewUI() {
+        tableView.separatorStyle = .none
     }
 
 }
