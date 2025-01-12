@@ -16,7 +16,6 @@ final class MyChattingTableViewCell: UITableViewCell, ChattingProtocol {
     override func awakeFromNib() {
         super.awakeFromNib()
         configureUI()
-        
     }
     
     func configureUI() {
