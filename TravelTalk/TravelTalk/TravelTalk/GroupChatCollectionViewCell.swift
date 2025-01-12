@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GroupChatCollectionViewCell: UICollectionViewCell {
+final class GroupChatCollectionViewCell: UICollectionViewCell {
     
     
     @IBOutlet var groupImageList: [UIImageView]!

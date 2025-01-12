@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChattingTableViewCell: UITableViewCell, ChattingProtocol {
+final class ChattingTableViewCell: UITableViewCell, ChattingProtocol {
     
     @IBOutlet var chatProfileImage: UIImageView!
     @IBOutlet var nameLabel: UILabel!

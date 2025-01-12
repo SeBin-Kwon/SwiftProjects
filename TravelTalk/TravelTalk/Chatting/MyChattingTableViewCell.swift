@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyChattingTableViewCell: UITableViewCell, ChattingProtocol {
+final class MyChattingTableViewCell: UITableViewCell, ChattingProtocol {
 
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var messageBackground: UIView!

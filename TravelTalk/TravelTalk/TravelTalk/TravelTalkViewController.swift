@@ -7,15 +7,16 @@
 
 import UIKit
 
-class TravelTalkViewController: UIViewController {
+final class TravelTalkViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var searchBar: UISearchBar!
     
     private let id = TravelTalkCollectionViewCell.identifier
     private let groupId = GroupChatCollectionViewCell.identifier
-    var isSearched = false
-    var filteredList = [ChatRoom]()
+    private var isSearched = false
+    private var filteredList = [ChatRoom]()
+    static var format = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()

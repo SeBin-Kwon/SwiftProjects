@@ -13,10 +13,10 @@ extension UICollectionViewCell {
     }
     
     func dateFormetted(_ str: String) -> String {
-        TravelTalkCollectionViewCell.format.dateFormat = "yyyy-MM-dd hh:mm"
-        let date = TravelTalkCollectionViewCell.format.date(from: str)
-        TravelTalkCollectionViewCell.format.dateFormat = "yy.MM.dd"
-        return TravelTalkCollectionViewCell.format.string(from: date ?? Date())
+        TravelTalkViewController.format.dateFormat = "yyyy-MM-dd hh:mm"
+        let date = TravelTalkViewController.format.date(from: str)
+        TravelTalkViewController.format.dateFormat = "yy.MM.dd"
+        return TravelTalkViewController.format.string(from: date ?? Date())
     }
 }
 

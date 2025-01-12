@@ -7,13 +7,13 @@
 
 import UIKit
 
-class TravelTalkCollectionViewCell: UICollectionViewCell {
+final class TravelTalkCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var messageLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
-    static var format = DateFormatter()
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

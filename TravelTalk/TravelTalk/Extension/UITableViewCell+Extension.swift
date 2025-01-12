@@ -13,11 +13,11 @@ extension UITableViewCell {
     }
     
     func dateFormetted(_ str: String) -> String {
-        TravelTalkCollectionViewCell.format.dateFormat = "yyyy-MM-dd HH:mm"
-        let date = TravelTalkCollectionViewCell.format.date(from: str)
-        TravelTalkCollectionViewCell.format.locale = Locale(identifier: "ko_KR")
-        TravelTalkCollectionViewCell.format.dateFormat = "hh:mm a"
-        return TravelTalkCollectionViewCell.format.string(from: date ?? Date())
+        TravelTalkViewController.format.dateFormat = "yyyy-MM-dd HH:mm"
+        let date = TravelTalkViewController.format.date(from: str)
+        TravelTalkViewController.format.locale = Locale(identifier: "ko_KR")
+        TravelTalkViewController.format.dateFormat = "hh:mm a"
+        return TravelTalkViewController.format.string(from: date ?? Date())
     }
     
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChattingViewController: UIViewController {
+final class ChattingViewController: UIViewController {
     private let chattingId = ChattingTableViewCell.identifier
     private let myChattingId = MyChattingTableViewCell.identifier
     @IBOutlet var tableView: UITableView!
@@ -39,7 +39,7 @@ class ChattingViewController: UIViewController {
     @IBAction func chatButtonTapped(_ sender: UIButton) {
         guard let text = textView.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard !text.isEmpty else { return }
-        let date = TravelTalkCollectionViewCell.format.string(from: Date())
+        let date = TravelTalkViewController.format.string(from: Date())
         let message = Chat(user: .user, date: date, message: text)
         chatList.append(message)
         textView.text = ""
