@@ -12,6 +12,7 @@ class ChattingViewController: UIViewController {
     private let myChattingId = MyChattingTableViewCell.identifier
     @IBOutlet var tableView: UITableView!
     var chatList: [Chat]?
+    var chatroomName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,8 @@ class ChattingViewController: UIViewController {
         let myXib = UINib(nibName: myChattingId, bundle: nil)
         tableView.register(xib, forCellReuseIdentifier: chattingId)
         tableView.register(myXib, forCellReuseIdentifier: myChattingId)
-        tableView.rowHeight = 120
+        tableView.rowHeight = UITableView.automaticDimension
+        navigationItem.title = chatroomName
     }
 
 }

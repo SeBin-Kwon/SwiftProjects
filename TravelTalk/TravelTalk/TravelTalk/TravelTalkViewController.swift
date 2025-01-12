@@ -24,6 +24,7 @@ class TravelTalkViewController: UIViewController {
         collectionView.dataSource = self
         configureCollectionViewLayout()
         configureSearchBarUI()
+        configureNavigationBarUI()
     }
     
     private func configureSearchBarUI() {
@@ -44,8 +45,10 @@ class TravelTalkViewController: UIViewController {
         collectionView.collectionViewLayout = layout
     }
     
-    private func configureNavigationBarUI(){
-        
+    private func configureNavigationBarUI() {
+        let back = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        back.tintColor = .black
+        navigationItem.backBarButtonItem = back
     }
     
 }
@@ -80,7 +83,7 @@ extension TravelTalkViewController: UICollectionViewDelegate, UICollectionViewDa
         view.endEditing(true)
         guard let vc = storyboard?.instantiateViewController(withIdentifier: ChattingViewController.identifier) as? ChattingViewController else { return }
         vc.chatList = mockChatList[indexPath.item].chatList
-
+        vc.chatroomName = mockChatList[indexPath.item].chatroomName
         navigationController?.pushViewController(vc, animated: true)
     }
     
