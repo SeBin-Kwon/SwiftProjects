@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchMovieViewController: UIViewController {
-
+    
     let backgroundImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "film")
@@ -23,7 +23,7 @@ class SearchMovieViewController: UIViewController {
     
     let textField: UITextField = {
         let textfield = UITextField()
-        textfield.backgroundColor = .red
+        textfield.textColor = UIColor.white
         return textfield
     }()
     
@@ -39,41 +39,18 @@ class SearchMovieViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
+        stackView.spacing = 20
         stackView.addArrangedSubview(textField)
         stackView.addArrangedSubview(searchButton)
         return stackView
     }()
     
-    let rankLabel: UILabel = {
-       let label = UILabel()
-        label.backgroundColor = .white
-        label.textColor = .black
-        return label
-    }()
-    let titleLabel: UILabel = {
-       let label = UILabel()
-        label.textColor = .white
-        return label
-    }()
-    let dateLabel: UILabel = {
-       let label = UILabel()
-        label.textColor = .white
-        return label
-    }()
-    
-    lazy var cellView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-//        stackView.addArrangedSubview(rankLabel)
-//        stackView.addArrangedSubview(titleLabel)
-//        stackView.addArrangedSubview(dateLabel)
-        return stackView
-    }()
+    lazy var cellStackView = configureCellStackViewUI()
     
     lazy var tableStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 30
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -83,41 +60,87 @@ class SearchMovieViewController: UIViewController {
         configureBackground()
         configureSearchStackView()
         configureSearchButton()
-        configureTable()
+        configureTableStack()
+        configureLabelData()
     }
     
-    func configureTable() {
-        view.addSubview(tableStackView)
+    override func viewDidLayoutSubviews() {
+        let border = CALayer()
+        border.frame = CGRect(x: 0, y: textField.frame.size.height-1, width: textField.frame.width, height: 3)
+        border.backgroundColor = UIColor.white.cgColor
+        textField.layer.addSublayer(border)
+    }
+    
+    func configureLabelData() {
         movieList.forEach { movie in
+            let rankLabel: UILabel = {
+                let label = UILabel()
+                label.textAlignment = .center
+                label.font = .systemFont(ofSize: 16, weight: .bold)
+                label.backgroundColor = .white
+                label.textColor = .black
+                return label
+            }()
+            
+            let titleLabel: UILabel = {
+                let label = UILabel()
+                label.textColor = .white
+                label.font = .systemFont(ofSize: 16, weight: .bold)
+                return label
+            }()
+            let dateLabel: UILabel = {
+                let label = UILabel()
+                label.textColor = .white
+                label.font = .systemFont(ofSize: 14)
+                label.textAlignment = .right
+                return label
+            }()
             rankLabel.text = String(movie.rank)
             titleLabel.text = movie.title
             dateLabel.text = movie.releaseDate
-            cellView.addArrangedSubview(rankLabel)
-            cellView.addArrangedSubview(titleLabel)
-            cellView.addArrangedSubview(dateLabel)
-            tableStackView.addArrangedSubview(cellView)
-            cellView.snp.makeConstraints { make in
-                make.center.equalToSuperview()
+            
+            let cellStackView = configureCellStackViewUI()
+            [rankLabel, titleLabel, dateLabel].forEach { label in
+                cellStackView.addArrangedSubview(label)
             }
+            rankLabel.snp.makeConstraints { make in
+                make.width.equalTo(40)
+            }
+            tableStackView.addArrangedSubview(cellStackView)
         }
+    }
+    
+    func configureTableStack() {
+        view.addSubview(tableStackView)
         tableStackView.snp.makeConstraints { make in
-            make.top.equalTo(searchStackView.snp.bottom)
-            make.height.equalTo(400)
+            make.top.equalTo(searchStackView.snp.bottom).offset(20)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.bottom.equalTo(-180)
         }
+    }
+    
+    func configureCellStackViewUI() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 20
+        stackView.distribution = .fill
+        return stackView
     }
     
     func configureSearchButton() {
         searchButton.snp.makeConstraints { make in
-            make.width.equalTo(50)
+            make.width.equalTo(100)
         }
     }
     
     func configureSearchStackView() {
         view.addSubview(searchStackView)
         searchStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(30)
+            make.top.equalTo(40)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.height.equalTo(60)
         }
     }
     
@@ -131,5 +154,4 @@ class SearchMovieViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
-
 }

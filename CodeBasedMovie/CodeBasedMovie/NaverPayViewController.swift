@@ -65,7 +65,7 @@ class NaverPayViewController: UIViewController {
         btn.setTitle("확인", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = UIColor.greenColor1
-        btn.layer.cornerRadius = 25
+//        btn.layer.cornerRadius = 25
         return btn
     }()
     
@@ -81,6 +81,10 @@ class NaverPayViewController: UIViewController {
         configureCloseButton()
         configureOkButton()
         configureCheckButton()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        okButton.layer.cornerRadius = okButton.frame.height / 2
     }
     
     func configureOkButton() {
