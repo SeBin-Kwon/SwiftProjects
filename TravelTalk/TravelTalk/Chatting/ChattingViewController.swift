@@ -83,6 +83,29 @@ extension ChattingViewController: UITextViewDelegate {
         textViewBackground.layer.cornerRadius = 10
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        let standardHeight = getTextHeight(text: "TEXT")
+        let height = getTextHeight(text: textView.text)
+        let numberOfLines = Int(ceil(height / standardHeight))
+        textView.isScrollEnabled = numberOfLines < 4 ? false : true
+//        let textViewHeight = textViewBackground.bounds.height
+//        let textViewWidth = textViewBackground.bounds.width
+//        textViewBackground.bounds = CGRect(x: 0, y: 0, width: textViewWidth, height: textViewHeight * CGFloat(numberOfLines))
+    }
+    
+    private func getTextHeight(text: String) -> CGFloat {
+            let size = CGSize(width: textView.bounds.width, height: .greatestFiniteMagnitude)
+            let font = UIFont.systemFont(ofSize: 14)
+            let rect = text.boundingRect(
+                with: size,
+                options: [.usesLineFragmentOrigin, .usesFontLeading],
+                attributes: [.font: font],
+                context: nil
+            )
+
+            return rect.height
+        }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil

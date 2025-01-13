@@ -103,7 +103,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="czB-Cm-gSi" secondAttribute="bottom" constant="8" id="5iy-Bi-DRA"/>
                                     <constraint firstItem="0eC-ed-YO6" firstAttribute="leading" secondItem="iyT-Xl-oOc" secondAttribute="leading" constant="8" id="AHM-74-nz1"/>
-                                    <constraint firstAttribute="height" constant="50" id="BiS-yt-Vsb"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="BiS-yt-Vsb"/>
                                     <constraint firstItem="czB-Cm-gSi" firstAttribute="leading" secondItem="0eC-ed-YO6" secondAttribute="trailing" constant="8" id="Fse-1X-hU0"/>
                                     <constraint firstItem="0eC-ed-YO6" firstAttribute="top" secondItem="iyT-Xl-oOc" secondAttribute="top" constant="8" id="TvT-Gt-l3Y"/>
                                     <constraint firstAttribute="bottom" secondItem="0eC-ed-YO6" secondAttribute="bottom" constant="8" id="VXa-g1-2dE"/>
