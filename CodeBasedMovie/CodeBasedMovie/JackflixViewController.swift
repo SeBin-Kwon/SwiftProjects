@@ -36,6 +36,7 @@ class JackflixViewController: UIViewController {
     }()
     let infoSwitch: UISwitch = {
         let switchBtn = UISwitch()
+        switchBtn.isOn = true
         switchBtn.onTintColor = .red
         return switchBtn
     }()
@@ -43,11 +44,11 @@ class JackflixViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        configureTitleLabelUI()
-        configureTextFieldUI()
-        configureSingUpButtonUI()
+        configureTitleLabel()
+        configureTextField()
+        configureSingUpButton()
         configureInfoSwitch()
-        configureInfoLabelUI()
+        configureInfoLabel()
     }
     
     func configureInfoSwitch() {
@@ -58,16 +59,15 @@ class JackflixViewController: UIViewController {
         }
     }
     
-    func configureInfoLabelUI() {
+    func configureInfoLabel() {
         view.addSubview(infoLabel)
         infoLabel.snp.makeConstraints { make in
             make.centerY.equalTo(infoSwitch)
-//            make.top.equalTo(signUpButton.snp.bottom).offset(20)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
         }
     }
     
-    func configureSingUpButtonUI() {
+    func configureSingUpButton() {
         view.addSubview(signUpButton)
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(textFieldList[textFieldList.count-1].snp.bottom).offset(20)
@@ -78,7 +78,7 @@ class JackflixViewController: UIViewController {
         }
     }
     
-    func configureTitleLabelUI() {
+    func configureTitleLabel() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide)
@@ -86,7 +86,7 @@ class JackflixViewController: UIViewController {
         }
     }
     
-    func configureTextFieldUI() {
+    func configureTextField() {
         for i in 0..<placeholderList.count {
             textFieldList.append(UITextField())
             view.addSubview(textFieldList[i])

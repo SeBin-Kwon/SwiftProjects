@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func secondButtonTapped(_ sender: UIButton) {
+        let vc =  NaverPayViewController()
+        present(vc, animated: true)
     }
     
     @IBAction func thirdButtonTapped(_ sender: UIButton) {
