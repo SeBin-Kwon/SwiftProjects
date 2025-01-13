@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func thirdButtonTapped(_ sender: UIButton) {
+        let vc = SearchMovieViewController()
+        present(vc, animated: true)
     }
 }
 

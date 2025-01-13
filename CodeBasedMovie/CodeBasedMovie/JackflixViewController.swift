@@ -51,6 +51,7 @@ class JackflixViewController: UIViewController {
         configureInfoLabel()
     }
     
+    // UIStackView 사용하기
     func configureInfoSwitch() {
         view.addSubview(infoSwitch)
         infoSwitch.snp.makeConstraints { make in
