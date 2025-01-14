@@ -10,7 +10,11 @@ import Alamofire
 
 class SearchMovieViewController: UIViewController {
     
-    var movieList = [Movie]()
+    var movieList = [Movie]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     let tableView: UITableView = {
         let table = UITableView()
@@ -33,6 +37,8 @@ class SearchMovieViewController: UIViewController {
     let textField: UITextField = {
         let textfield = UITextField()
         textfield.textColor = UIColor.white
+        textfield.placeholder = "yyyyMMdd 형식으로 검색해 주세요"
+        textfield.keyboardType = .numberPad
         return textfield
     }()
     
@@ -75,7 +81,6 @@ class SearchMovieViewController: UIViewController {
         AF.request(url, method: .get).responseDecodable(of: MovieResult.self) { response in
             switch response.result {
             case .success(let value):
-                print(value.boxOfficeResult.dailyBoxOfficeList[0].movieNm)
                 value.boxOfficeResult.dailyBoxOfficeList.forEach {
                     self.movieList.append($0)
                 }
@@ -134,8 +139,12 @@ class SearchMovieViewController: UIViewController {
 
 extension SearchMovieViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movieList.count
+        return movieList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -143,6 +152,7 @@ extension SearchMovieViewController: UITableViewDelegate, UITableViewDataSource 
         guard let cell = tableCell as? MovieTableViewCell else { return tableCell }
         cell.backgroundColor = .clear
         cell.configureData(movieList[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     
