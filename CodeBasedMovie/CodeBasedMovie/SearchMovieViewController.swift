@@ -103,6 +103,15 @@ class SearchMovieViewController: UIViewController {
     @objc
     func searchDailyMovieRank() {
         guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        guard let date = format.date(from: text) else {
+            displayAlert("잘못된 날짜입니다.")
+            return
+        }
+        
+        if date > Date() || date < Date.distantPast {
+            displayAlert("날짜를 다시 확인해 주세요")
+        }
+        
         getMovieData(text)
         view.endEditing(true)
     }

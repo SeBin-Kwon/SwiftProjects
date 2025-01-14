@@ -205,6 +205,7 @@ class LottoViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.height.equalTo(40)
         }
     }
     
@@ -233,7 +234,6 @@ class LottoViewController: UIViewController {
 }
 
 extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         textField.text = String(list[row])
