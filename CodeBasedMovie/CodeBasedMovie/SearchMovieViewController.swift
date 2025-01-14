@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Alamofire
 
 class SearchMovieViewController: UIViewController {
+    
+    var movieList = [Movie]()
 
     let tableView: UITableView = {
         let table = UITableView()
@@ -53,6 +56,7 @@ class SearchMovieViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getMovieData()
         configureBackground()
         configureSearchStackView()
         configureSearchButton()
@@ -60,7 +64,27 @@ class SearchMovieViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 45
-        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)   
+    }
+    
+    func getMovieData() {
+        let key = "bd6fe79987b8d185c867e059343572fa"
+        let date = "20250113"
+        let url = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)"
+        
+        AF.request(url, method: .get).responseDecodable(of: MovieResult.self) { response in
+            switch response.result {
+            case .success(let value):
+                print(value.boxOfficeResult.dailyBoxOfficeList[0].movieNm)
+                value.boxOfficeResult.dailyBoxOfficeList.forEach {
+                    self.movieList.append($0)
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
     
     override func viewDidLayoutSubviews() {

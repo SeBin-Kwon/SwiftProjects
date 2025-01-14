@@ -58,9 +58,9 @@ class MovieTableViewCell: UITableViewCell {
     }
 
     func configureData(_ cell: Movie) {
-        rankLabel.text = String(cell.rank)
-        titleLabel.text = cell.title
-        dateLabel.text = cell.releaseDate
+        rankLabel.text = cell.rank
+        titleLabel.text = cell.movieNm
+        dateLabel.text = cell.openDt
     }
     
     
