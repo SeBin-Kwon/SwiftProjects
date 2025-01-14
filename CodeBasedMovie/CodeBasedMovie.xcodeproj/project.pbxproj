@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AEB9A9A12D34F0970003559C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AEB9A9A02D34F0970003559C /* SnapKit */; };
+		AEB9AAEC2D3631A40003559C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AEB9AAEB2D3631A40003559C /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB9A9A12D34F0970003559C /* SnapKit in Frameworks */,
+				AEB9AAEC2D3631A40003559C /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = CodeBasedMovie;
 			packageProductDependencies = (
 				AEB9A9A02D34F0970003559C /* SnapKit */,
+				AEB9AAEB2D3631A40003559C /* Alamofire */,
 			);
 			productName = CodeBasedMovie;
 			productReference = AEB9A9872D34EE8E0003559C /* CodeBasedMovie.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				AEB9A99F2D34F0970003559C /* XCRemoteSwiftPackageReference "SnapKit" */,
+				AEB9AAEA2D3631A40003559C /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AEB9A9882D34EE8E0003559C /* Products */;
@@ -364,6 +368,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		AEB9AAEA2D3631A40003559C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -371,6 +383,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AEB9A99F2D34F0970003559C /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		AEB9AAEB2D3631A40003559C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AEB9AAEA2D3631A40003559C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
