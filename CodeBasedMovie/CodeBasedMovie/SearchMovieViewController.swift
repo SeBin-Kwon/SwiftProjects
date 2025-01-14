@@ -10,6 +10,8 @@ import Alamofire
 
 class SearchMovieViewController: UIViewController {
     
+    let format = DateFormatter()
+    
     var movieList = [Movie]() {
         didSet {
             tableView.reloadData()
@@ -62,7 +64,7 @@ class SearchMovieViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getMovieData()
+        getMovieData(settingYesterday())
         configureBackground()
         configureSearchStackView()
         configureSearchButton()
@@ -73,23 +75,40 @@ class SearchMovieViewController: UIViewController {
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)   
     }
     
-    func getMovieData() {
+    func getMovieData(_ date: String) {
         let key = "bd6fe79987b8d185c867e059343572fa"
-        let date = "20250113"
         let url = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)"
         
         AF.request(url, method: .get).responseDecodable(of: MovieResult.self) { response in
             switch response.result {
             case .success(let value):
+                self.movieList = []
                 value.boxOfficeResult.dailyBoxOfficeList.forEach {
                     self.movieList.append($0)
                 }
                 
             case .failure(let error):
+                self.displayAlert("yyyyMMdd 형식을 지켜서 검색해 주세요")
                 print(error)
             }
         }
         
+    }
+    
+    func settingYesterday() -> String {
+        format.dateFormat = "yyyyMMdd"
+        return format.string(from: Date() - 86400)
+    }
+    
+//    func dateFormetted(_ text: String) {
+//        
+//    }
+    
+    @objc
+    func searchDailyMovieRank() {
+        guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        getMovieData(text)
+        view.endEditing(true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,6 +132,7 @@ class SearchMovieViewController: UIViewController {
         searchButton.snp.makeConstraints { make in
             make.width.equalTo(100)
         }
+        searchButton.addTarget(self, action: #selector(searchDailyMovieRank), for: .touchUpInside)
     }
     
     func configureSearchStackView() {
