@@ -10,7 +10,8 @@ import Alamofire
 
 class LottoViewController: UIViewController {
     
-    let list = Array(1...1154)
+    lazy var list = Array((1...setLatestDate()).reversed())
+    lazy var round: Int = setLatestDate()
     
     let textField: UITextField = {
         let tf = UITextField()
@@ -82,10 +83,18 @@ class LottoViewController: UIViewController {
         pickerView.dataSource = self
         configureTextField()
         configureLabel()
-        getLottoData("1154")
+        getLottoData(String(round))
         configureBallStackView()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureTapped))
         view.addGestureRecognizer(tapGesture)
+    }
+
+    func setLatestDate() -> Int {
+        let today = Calendar.current
+        let startDay = today.date(from: DateComponents(year:2002, month: 12, day: 7))
+        let dateDifference = today.dateComponents([.day], from: startDay ?? Date(), to: Date())
+        let result = (dateDifference.day ?? 0) / 7 + 1
+        return result
     }
     
     override func viewDidLayoutSubviews() {
@@ -199,6 +208,7 @@ class LottoViewController: UIViewController {
         }
     }
     
+    
     func getLottoData(_ num: String) {
         let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + num
         AF.request(url, method: .get).responseDecodable(of: Lotto.self) { response in
@@ -224,6 +234,7 @@ class LottoViewController: UIViewController {
 
 extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         textField.text = String(list[row])
         getLottoData(String(list[row]))
@@ -234,7 +245,7 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 1154
+        return list.count
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

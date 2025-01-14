@@ -64,7 +64,7 @@ class SearchMovieViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getMovieData(settingYesterday())
+        getMovieData(setYesterday())
         configureBackground()
         configureSearchStackView()
         configureSearchButton()
@@ -95,15 +95,11 @@ class SearchMovieViewController: UIViewController {
         
     }
     
-    func settingYesterday() -> String {
+    func setYesterday() -> String {
         format.dateFormat = "yyyyMMdd"
         return format.string(from: Date() - 86400)
     }
-    
-//    func dateFormetted(_ text: String) {
-//        
-//    }
-    
+
     @objc
     func searchDailyMovieRank() {
         guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
