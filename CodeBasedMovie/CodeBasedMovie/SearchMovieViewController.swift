@@ -8,6 +8,12 @@
 import UIKit
 
 class SearchMovieViewController: UIViewController {
+
+    let tableView: UITableView = {
+        let table = UITableView()
+        table.backgroundColor = .clear
+        return table
+    }()
     
     let backgroundImageView: UIImageView = {
         let image = UIImageView()
@@ -44,24 +50,17 @@ class SearchMovieViewController: UIViewController {
         stackView.addArrangedSubview(searchButton)
         return stackView
     }()
-    
-    lazy var cellStackView = configureCellStackViewUI()
-    
-    lazy var tableStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 30
-        stackView.distribution = .fillEqually
-        return stackView
-    }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackground()
         configureSearchStackView()
         configureSearchButton()
-        configureTableStack()
-        configureLabelData()
+        configureTableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 45
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
     }
     
     override func viewDidLayoutSubviews() {
@@ -71,61 +70,14 @@ class SearchMovieViewController: UIViewController {
         textField.layer.addSublayer(border)
     }
     
-    func configureLabelData() {
-        movieList.forEach { movie in
-            let rankLabel: UILabel = {
-                let label = UILabel()
-                label.textAlignment = .center
-                label.font = .systemFont(ofSize: 16, weight: .bold)
-                label.backgroundColor = .white
-                label.textColor = .black
-                return label
-            }()
-            
-            let titleLabel: UILabel = {
-                let label = UILabel()
-                label.textColor = .white
-                label.font = .systemFont(ofSize: 16, weight: .bold)
-                return label
-            }()
-            let dateLabel: UILabel = {
-                let label = UILabel()
-                label.textColor = .white
-                label.font = .systemFont(ofSize: 14)
-                label.textAlignment = .right
-                return label
-            }()
-            rankLabel.text = String(movie.rank)
-            titleLabel.text = movie.title
-            dateLabel.text = movie.releaseDate
-            
-            let cellStackView = configureCellStackViewUI()
-            [rankLabel, titleLabel, dateLabel].forEach { label in
-                cellStackView.addArrangedSubview(label)
-            }
-            rankLabel.snp.makeConstraints { make in
-                make.width.equalTo(40)
-            }
-            tableStackView.addArrangedSubview(cellStackView)
-        }
-    }
-    
-    func configureTableStack() {
-        view.addSubview(tableStackView)
-        tableStackView.snp.makeConstraints { make in
-            make.top.equalTo(searchStackView.snp.bottom).offset(20)
+    func configureTableView() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(searchStackView.snp.bottom).offset(30)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
             make.bottom.equalTo(-180)
         }
-    }
-    
-    func configureCellStackViewUI() -> UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 20
-        stackView.distribution = .fill
-        return stackView
     }
     
     func configureSearchButton() {
@@ -137,10 +89,10 @@ class SearchMovieViewController: UIViewController {
     func configureSearchStackView() {
         view.addSubview(searchStackView)
         searchStackView.snp.makeConstraints { make in
-            make.top.equalTo(40)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
     }
     
@@ -154,4 +106,21 @@ class SearchMovieViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
+}
+
+extension SearchMovieViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        movieList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let tableCell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath)
+        guard let cell = tableCell as? MovieTableViewCell else { return tableCell }
+        cell.backgroundColor = .clear
+        cell.configureData(movieList[indexPath.row])
+        return cell
+    }
+    
+    
 }

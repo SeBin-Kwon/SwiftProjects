@@ -206,7 +206,7 @@ class LottoViewController: UIViewController {
             case .success(let value):
                 self.dateLabel.text = value.drwNoDate + " 추첨"
                 self.roundLabel.text = String(value.drwNo) + "회"
-                var ballList = self.ballStackView.subviews as? [UILabel]
+                let ballList = self.ballStackView.subviews as? [UILabel]
                 guard let ballList else { return }
                 ballList[0].text = String(value.drwtNo1)
                 ballList[1].text = String(value.drwtNo2)
