@@ -36,19 +36,21 @@ final class MovieTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(rankLabel)
-        contentView.addSubview(titleLabel)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(titleLabel)
+        
         rankLabel.snp.makeConstraints { make in
             make.leading.equalTo(contentView.safeAreaLayoutGuide)
             make.width.equalTo(40)
             make.height.equalTo(25)
         }
-        titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(rankLabel.snp.trailing).offset(20)
-            make.centerY.equalTo(rankLabel)
-        }
         dateLabel.snp.makeConstraints { make in
             make.trailing.equalTo(contentView.safeAreaLayoutGuide)
+            make.centerY.equalTo(rankLabel)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(rankLabel.snp.trailing).offset(20)
+            make.trailing.equalTo(dateLabel.snp.leading).offset(-20)
             make.centerY.equalTo(rankLabel)
         }
     }
