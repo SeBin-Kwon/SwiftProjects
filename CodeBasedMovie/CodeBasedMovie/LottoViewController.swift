@@ -8,12 +8,12 @@
 import UIKit
 import Alamofire
 
-class LottoViewController: UIViewController {
+final class LottoViewController: UIViewController {
     
-    lazy var list = Array((1...setLatestDate()).reversed())
-    lazy var round: Int = setLatestDate()
+    private lazy var list = Array((1...setLatestDate()).reversed())
+    private lazy var round: Int = setLatestDate()
     
-    let textField: UITextField = {
+    private let textField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "로또 회차를 입력하세요"
         tf.borderStyle = .roundedRect
@@ -21,52 +21,52 @@ class LottoViewController: UIViewController {
         return tf
     }()
     
-    let pickerView = UIPickerView()
+    private let pickerView = UIPickerView()
     
-    let infoLabel: UILabel = {
+    private let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "당첨번호 안내"
         label.font = .systemFont(ofSize: 14)
         return label
     }()
     
-    let dateLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
         label.font = .systemFont(ofSize: 13)
         return label
     }()
     
-    let line: UIView = {
+    private let line: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray5
         return view
     }()
     
-    let roundLabel: UILabel = {
+    private let roundLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemYellow
         label.font = .systemFont(ofSize: 25, weight: .bold)
         return label
     }()
     
-    let resultLabel: UILabel = {
+    private let resultLabel: UILabel = {
         let label = UILabel()
         label.text = "당첨결과"
         label.font = .systemFont(ofSize: 25)
         return label
     }()
     
-    let uiView = UIView()
+    private let uiView = UIView()
     
-    let bonusLable: UILabel = {
+    private let bonusLable: UILabel = {
         let label = UILabel()
         label.text = "보너스"
         label.font = .systemFont(ofSize: 14)
         return label
     }()
     
-    let ballStackView: UIStackView = {
+    private let ballStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 10
@@ -74,7 +74,7 @@ class LottoViewController: UIViewController {
         stackView.alignment = .center
         return stackView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -88,8 +88,8 @@ class LottoViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureTapped))
         view.addGestureRecognizer(tapGesture)
     }
-
-    func setLatestDate() -> Int {
+    
+    private func setLatestDate() -> Int {
         let today = Calendar.current
         let startDay = today.date(from: DateComponents(year:2002, month: 12, day: 7))
         let dateDifference = today.dateComponents([.day], from: startDay ?? Date(), to: Date())
@@ -119,11 +119,11 @@ class LottoViewController: UIViewController {
     }
     
     @objc
-    func tapGestureTapped(_ sender: UITapGestureRecognizer) {
+    private func tapGestureTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
     
-    func configureBallUI() -> UILabel {
+    private func configureBallUI() -> UILabel {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
@@ -132,7 +132,7 @@ class LottoViewController: UIViewController {
         return label
     }
     
-    func configureBallStackView() {
+    private func configureBallStackView() {
         view.addSubview(ballStackView)
         view.addSubview(bonusLable)
         for i in 0..<8 {
@@ -165,7 +165,41 @@ class LottoViewController: UIViewController {
         }
     }
     
-    func configureLabel() {
+    private func configureTextField() {
+        view.addSubview(textField)
+        textField.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.centerX.equalToSuperview()
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.height.equalTo(40)
+        }
+    }
+    
+    
+    private func getLottoData(_ num: String) {
+        let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + num
+        AF.request(url, method: .get).responseDecodable(of: Lotto.self) { response in
+            switch response.result {
+            case .success(let value):
+                self.dateLabel.text = value.drwNoDate + " 추첨"
+                self.roundLabel.text = String(value.drwNo) + "회"
+                let ballList = self.ballStackView.subviews as? [UILabel]
+                guard let ballList else { return }
+                ballList[0].text = String(value.drwtNo1)
+                ballList[1].text = String(value.drwtNo2)
+                ballList[2].text = String(value.drwtNo3)
+                ballList[3].text = String(value.drwtNo4)
+                ballList[4].text = String(value.drwtNo5)
+                ballList[5].text = String(value.drwtNo6)
+                ballList[7].text = String(value.bnusNo)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func configureLabel() {
         view.addSubview(infoLabel)
         view.addSubview(dateLabel)
         view.addSubview(line)
@@ -197,40 +231,6 @@ class LottoViewController: UIViewController {
             make.top.equalTo(line.snp.bottom).offset(30)
         }
     }
-    
-    func configureTextField() {
-        view.addSubview(textField)
-        textField.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.centerX.equalToSuperview()
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            make.height.equalTo(40)
-        }
-    }
-    
-    
-    func getLottoData(_ num: String) {
-        let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + num
-        AF.request(url, method: .get).responseDecodable(of: Lotto.self) { response in
-            switch response.result {
-            case .success(let value):
-                self.dateLabel.text = value.drwNoDate + " 추첨"
-                self.roundLabel.text = String(value.drwNo) + "회"
-                let ballList = self.ballStackView.subviews as? [UILabel]
-                guard let ballList else { return }
-                ballList[0].text = String(value.drwtNo1)
-                ballList[1].text = String(value.drwtNo2)
-                ballList[2].text = String(value.drwtNo3)
-                ballList[3].text = String(value.drwtNo4)
-                ballList[4].text = String(value.drwtNo5)
-                ballList[5].text = String(value.drwtNo6)
-                ballList[7].text = String(value.bnusNo)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 }
 
 extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -251,7 +251,5 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
-    
     
 }

@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class MovieTableViewCell: UITableViewCell {
+final class MovieTableViewCell: UITableViewCell {
     
-    let rankLabel: UILabel = {
+    private let rankLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .bold)
@@ -19,13 +19,13 @@ class MovieTableViewCell: UITableViewCell {
         return label
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
-    let dateLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 14)
@@ -52,11 +52,11 @@ class MovieTableViewCell: UITableViewCell {
             make.centerY.equalTo(rankLabel)
         }
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func configureData(_ cell: Movie) {
         rankLabel.text = cell.rank
         titleLabel.text = cell.movieNm

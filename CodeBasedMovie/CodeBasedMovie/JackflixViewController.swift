@@ -7,18 +7,18 @@
 
 import UIKit
 
-class JackflixViewController: UIViewController {
+final class JackflixViewController: UIViewController {
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "JACKPLAX"
         label.textColor = .red
         label.font = .systemFont(ofSize: 30, weight: .black)
         return label
     }()
-    var textFieldList = [UITextField]()
-    let placeholderList = ["이메일 주소 또는 전화번호", "비밀번호", "닉네임", "위치", "추천 코드 입력"]
-    let signUpButton: UIButton = {
+    private var textFieldList = [UITextField]()
+    private let placeholderList = ["이메일 주소 또는 전화번호", "비밀번호", "닉네임", "위치", "추천 코드 입력"]
+    private let signUpButton: UIButton = {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -27,14 +27,14 @@ class JackflixViewController: UIViewController {
         button.layer.cornerRadius = 8
         return button
     }()
-    let infoLabel: UILabel = {
+    private let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "추가 정보 입력"
         label.font = .systemFont(ofSize: 17)
         label.textColor = .white
         return label
     }()
-    let infoSwitch: UISwitch = {
+    private let infoSwitch: UISwitch = {
         let switchBtn = UISwitch()
         switchBtn.isOn = true
         switchBtn.onTintColor = .red
@@ -51,8 +51,7 @@ class JackflixViewController: UIViewController {
         configureInfoLabel()
     }
     
-    // UIStackView 사용하기
-    func configureInfoSwitch() {
+    private func configureInfoSwitch() {
         view.addSubview(infoSwitch)
         infoSwitch.snp.makeConstraints { make in
             make.top.equalTo(signUpButton.snp.bottom).offset(20)
@@ -60,7 +59,7 @@ class JackflixViewController: UIViewController {
         }
     }
     
-    func configureInfoLabel() {
+    private func configureInfoLabel() {
         view.addSubview(infoLabel)
         infoLabel.snp.makeConstraints { make in
             make.centerY.equalTo(infoSwitch)
@@ -68,7 +67,7 @@ class JackflixViewController: UIViewController {
         }
     }
     
-    func configureSingUpButton() {
+    private func configureSingUpButton() {
         view.addSubview(signUpButton)
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(textFieldList[textFieldList.count-1].snp.bottom).offset(20)
@@ -79,7 +78,7 @@ class JackflixViewController: UIViewController {
         }
     }
     
-    func configureTitleLabel() {
+    private func configureTitleLabel() {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide)
@@ -87,7 +86,7 @@ class JackflixViewController: UIViewController {
         }
     }
     
-    func configureTextField() {
+    private func configureTextField() {
         for i in 0..<placeholderList.count {
             textFieldList.append(UITextField())
             view.addSubview(textFieldList[i])
@@ -115,5 +114,5 @@ class JackflixViewController: UIViewController {
             textFieldList[i].borderStyle = .roundedRect
         }
     }
-
+    
 }

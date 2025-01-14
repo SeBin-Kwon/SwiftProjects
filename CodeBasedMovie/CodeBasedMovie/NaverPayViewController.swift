@@ -8,41 +8,41 @@
 import UIKit
 import SnapKit
 
-class NaverPayViewController: UIViewController {
+final class NaverPayViewController: UIViewController {
     
-    lazy var segment = configureSegmentUI()
-    let backgroundUIView: UIView = {
+    private lazy var segment = configureSegmentUI()
+    private let backgroundUIView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 15
         return view
     }()
-    let mainImageView: UIImageView = {
+    private let mainImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "lock")
         image.contentMode = .scaleAspectFit
         return image
     }()
-    let logoImageView: UIImageView = {
+    private let logoImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "logo")
         image.contentMode = .scaleAspectFit
         return image
     }()
-    let domesticLabel: UILabel = {
+    private let domesticLabel: UILabel = {
         let label = UILabel()
         label.text = "국내 ▼"
         label.font = .systemFont(ofSize: 14)
         label.textColor = .gray
         return label
     }()
-    let closeButton: UIButton = {
+    private let closeButton: UIButton = {
         let xButton = UIButton()
         xButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         xButton.tintColor = .black
         return xButton
     }()
-    let mainLabel: UILabel = {
+    private let mainLabel: UILabel = {
         let label = UILabel()
         label.text = "한 번만 인증하고\n비밀번호 없이 결제하세요"
         label.numberOfLines = 0
@@ -51,7 +51,7 @@ class NaverPayViewController: UIViewController {
         label.textColor = .darkGray
         return label
     }()
-    let checkButton: UIButton = {
+    private let checkButton: UIButton = {
         let btn = UIButton()
         btn.setTitle(" 바로결제 사용하기", for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
@@ -60,12 +60,11 @@ class NaverPayViewController: UIViewController {
         btn.setTitleColor(.darkGray, for: .normal)
         return btn
     }()
-    let okButton: UIButton = {
+    private let okButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("확인", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = UIColor.greenColor1
-//        btn.layer.cornerRadius = 25
         return btn
     }()
     
@@ -87,7 +86,7 @@ class NaverPayViewController: UIViewController {
         okButton.layer.cornerRadius = okButton.frame.height / 2
     }
     
-    func configureOkButton() {
+    private func configureOkButton() {
         backgroundUIView.addSubview(okButton)
         okButton.snp.makeConstraints { make in
             make.bottom.equalTo(backgroundUIView).inset(20)
@@ -97,7 +96,7 @@ class NaverPayViewController: UIViewController {
         }
     }
     
-    func configureCheckButton() {
+    private func configureCheckButton() {
         backgroundUIView.addSubview(checkButton)
         checkButton.snp.makeConstraints { make in
             make.bottom.equalTo(okButton.snp.top).offset(-30)
@@ -105,7 +104,7 @@ class NaverPayViewController: UIViewController {
         }
     }
     
-    func configureMainLabel() {
+    private func configureMainLabel() {
         backgroundUIView.addSubview(mainLabel)
         mainLabel.snp.makeConstraints { make in
             make.top.equalTo(mainImageView.snp.bottom).offset(20)
@@ -113,7 +112,7 @@ class NaverPayViewController: UIViewController {
         }
     }
     
-    func configureCloseButton() {
+    private func configureCloseButton() {
         backgroundUIView.addSubview(closeButton)
         closeButton.snp.makeConstraints { make in
             make.centerY.equalTo(logoImageView)
@@ -121,7 +120,7 @@ class NaverPayViewController: UIViewController {
         }
     }
     
-    func configureDomesticLabel() {
+    private func configureDomesticLabel() {
         backgroundUIView.addSubview(domesticLabel)
         domesticLabel.snp.makeConstraints { make in
             make.centerY.equalTo(logoImageView)
@@ -129,7 +128,7 @@ class NaverPayViewController: UIViewController {
         }
     }
     
-    func configureLogoImageView() {
+    private func configureLogoImageView() {
         backgroundUIView.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { make in
             make.top.equalTo(backgroundUIView).inset(-20)
@@ -138,7 +137,7 @@ class NaverPayViewController: UIViewController {
         }
     }
     
-    func configureMainImageView() {
+    private func configureMainImageView() {
         backgroundUIView.addSubview(mainImageView)
         mainImageView.snp.makeConstraints { make in
             make.centerX.equalTo(backgroundUIView)
@@ -148,7 +147,7 @@ class NaverPayViewController: UIViewController {
         }
     }
     
-    func configureBackgroundUIView() {
+    private func configureBackgroundUIView() {
         view.addSubview(backgroundUIView)
         backgroundUIView.snp.makeConstraints { make in
             make.top.equalTo(segment.snp.bottom).offset(18)
@@ -159,7 +158,7 @@ class NaverPayViewController: UIViewController {
         
     }
     
-    func configureSegment() {
+    private func configureSegment() {
         view.addSubview(segment)
         segment.snp.makeConstraints { make in
             make.top.equalTo(40)
@@ -169,7 +168,7 @@ class NaverPayViewController: UIViewController {
         }
     }
     
-    func configureSegmentUI() -> UISegmentedControl {
+    private func configureSegmentUI() -> UISegmentedControl {
         let seg = UISegmentedControl()
         seg.insertSegment(withTitle: "멤버십", at: 0, animated: true)
         seg.insertSegment(withTitle: "현장결제", at: 1, animated: true)
@@ -184,5 +183,5 @@ class NaverPayViewController: UIViewController {
         seg.layer.masksToBounds = true
         return seg
     }
-
+    
 }

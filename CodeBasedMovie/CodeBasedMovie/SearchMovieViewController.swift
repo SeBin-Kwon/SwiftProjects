@@ -8,35 +8,35 @@
 import UIKit
 import Alamofire
 
-class SearchMovieViewController: UIViewController {
+final class SearchMovieViewController: UIViewController {
     
-    let format = DateFormatter()
+    private let format = DateFormatter()
     
-    var movieList = [Movie]() {
+    private var movieList = [Movie]() {
         didSet {
             tableView.reloadData()
         }
     }
-
-    let tableView: UITableView = {
+    
+    private let tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = .clear
         return table
     }()
     
-    let backgroundImageView: UIImageView = {
+    private let backgroundImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "film")
         image.contentMode = .scaleAspectFill
         return image
     }()
-    let backgroundUIView: UIView = {
+    private let backgroundUIView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
         return view
     }()
     
-    let textField: UITextField = {
+    private let textField: UITextField = {
         let textfield = UITextField()
         textfield.textColor = UIColor.white
         textfield.placeholder = "yyyyMMdd 형식으로 검색해 주세요"
@@ -44,7 +44,7 @@ class SearchMovieViewController: UIViewController {
         return textfield
     }()
     
-    let searchButton: UIButton = {
+    private let searchButton: UIButton = {
         let button = UIButton()
         button.setTitle("검색", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -52,7 +52,7 @@ class SearchMovieViewController: UIViewController {
         return button
     }()
     
-    lazy var searchStackView = {
+    private lazy var searchStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
@@ -61,7 +61,7 @@ class SearchMovieViewController: UIViewController {
         stackView.addArrangedSubview(searchButton)
         return stackView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getMovieData(setYesterday())
@@ -72,10 +72,10 @@ class SearchMovieViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 45
-        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)   
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
     }
     
-    func getMovieData(_ date: String) {
+    private func getMovieData(_ date: String) {
         let key = "bd6fe79987b8d185c867e059343572fa"
         let url = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)"
         
@@ -95,13 +95,13 @@ class SearchMovieViewController: UIViewController {
         
     }
     
-    func setYesterday() -> String {
+    private func setYesterday() -> String {
         format.dateFormat = "yyyyMMdd"
         return format.string(from: Date() - 86400)
     }
-
+    
     @objc
-    func searchDailyMovieRank() {
+    private func searchDailyMovieRank() {
         guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         guard let date = format.date(from: text) else {
             displayAlert("잘못된 날짜입니다.")
@@ -123,7 +123,7 @@ class SearchMovieViewController: UIViewController {
         textField.layer.addSublayer(border)
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(searchStackView.snp.bottom).offset(30)
@@ -133,14 +133,14 @@ class SearchMovieViewController: UIViewController {
         }
     }
     
-    func configureSearchButton() {
+    private func configureSearchButton() {
         searchButton.snp.makeConstraints { make in
             make.width.equalTo(100)
         }
         searchButton.addTarget(self, action: #selector(searchDailyMovieRank), for: .touchUpInside)
     }
     
-    func configureSearchStackView() {
+    private func configureSearchStackView() {
         view.addSubview(searchStackView)
         searchStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
@@ -150,7 +150,7 @@ class SearchMovieViewController: UIViewController {
         }
     }
     
-    func configureBackground() {
+    private func configureBackground() {
         view.addSubview(backgroundImageView)
         view.addSubview(backgroundUIView)
         backgroundImageView.snp.makeConstraints { make in
