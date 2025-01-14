@@ -39,7 +39,7 @@ final class SearchMovieViewController: UIViewController {
     private let textField: UITextField = {
         let textfield = UITextField()
         textfield.textColor = UIColor.white
-        textfield.placeholder = "yyyyMMdd 형식으로 검색해 주세요"
+        textfield.attributedPlaceholder = NSAttributedString(string: "yyyyMMdd 형식으로 검색해 주세요", attributes: [.foregroundColor: UIColor.gray])
         textfield.keyboardType = .numberPad
         return textfield
     }()
