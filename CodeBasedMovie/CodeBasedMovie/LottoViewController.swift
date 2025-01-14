@@ -10,6 +10,8 @@ import Alamofire
 
 class LottoViewController: UIViewController {
     
+    let list = Array(1...1154)
+    
     let textField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "로또 회차를 입력하세요"
@@ -56,6 +58,13 @@ class LottoViewController: UIViewController {
     
     let uiView = UIView()
     
+    let bonusLable: UILabel = {
+        let label = UILabel()
+        label.text = "보너스"
+        label.font = .systemFont(ofSize: 14)
+        return label
+    }()
+    
     let ballStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -75,11 +84,11 @@ class LottoViewController: UIViewController {
         configureLabel()
         getLottoData("1154")
         configureBallStackView()
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureTapped))
+        view.addGestureRecognizer(tapGesture)
     }
     
     override func viewDidLayoutSubviews() {
-        print(ballStackView.frame.height)
         ballStackView.subviews.forEach {
             $0.layer.cornerRadius = ballStackView.frame.height / 2
             guard let label = $0 as? UILabel else { return }
@@ -100,6 +109,11 @@ class LottoViewController: UIViewController {
         }
     }
     
+    @objc
+    func tapGestureTapped(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     func configureBallUI() -> UILabel {
         let label = UILabel()
         label.textColor = .white
@@ -111,6 +125,7 @@ class LottoViewController: UIViewController {
     
     func configureBallStackView() {
         view.addSubview(ballStackView)
+        view.addSubview(bonusLable)
         for i in 0..<8 {
             if i == 6 {
                 let plus: UILabel = {
@@ -133,6 +148,10 @@ class LottoViewController: UIViewController {
         ballStackView.snp.makeConstraints { make in
             make.top.equalTo(uiView.snp.bottom).offset(60)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
+        }
+        bonusLable.snp.makeConstraints { make in
+            make.top.equalTo(ballStackView.snp.bottom).offset(5)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
     }
@@ -201,18 +220,17 @@ class LottoViewController: UIViewController {
             }
         }
     }
-
-
 }
 
 extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        getLottoData()
+        textField.text = String(list[row])
+        getLottoData(String(list[row]))
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        <#code#>
+        return String(list[row])
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
