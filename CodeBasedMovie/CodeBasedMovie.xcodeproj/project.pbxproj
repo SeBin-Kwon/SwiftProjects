@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		AEB9A9A12D34F0970003559C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AEB9A9A02D34F0970003559C /* SnapKit */; };
 		AEB9AAEC2D3631A40003559C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AEB9AAEB2D3631A40003559C /* Alamofire */; };
+		AEB9AC292D37349E0003559C /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AEB9AC282D37349E0003559C /* Secret.xcconfig */; };
+		AEB9AC2B2D3735210003559C /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AEB9AC2A2D3735210003559C /* Secret.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AEB9A9872D34EE8E0003559C /* CodeBasedMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeBasedMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEB9AC282D37349E0003559C /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		AEB9AC2A2D3735210003559C /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -52,8 +56,10 @@
 		AEB9A97E2D34EE8E0003559C = {
 			isa = PBXGroup;
 			children = (
+				AEB9AC282D37349E0003559C /* Secret.xcconfig */,
 				AEB9A9892D34EE8E0003559C /* CodeBasedMovie */,
 				AEB9A9882D34EE8E0003559C /* Products */,
+				AEB9AC2A2D3735210003559C /* Secret.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +141,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEB9AC292D37349E0003559C /* Secret.xcconfig in Resources */,
+				AEB9AC2B2D3735210003559C /* Secret.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +161,7 @@
 /* Begin XCBuildConfiguration section */
 		AEB9A99B2D34EE910003559C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEB9AC282D37349E0003559C /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
